@@ -21,7 +21,7 @@ class SmokeDataset(Dataset):
         """pickle - The pickle file containing the simulated dataset of images"""
                 # for i in range(velocities.shape[0]):
             # velocities[i,:,:,:]=(velocities[i,:,:,:]-velocities[i,:,:,:].min())/(velocities[i,:,:,:].max()-velocities[i,:,:,:].min())
-        self.velocities = np.load(data, allow_pickle=True)
+        self.velocities = data #np.load(data, allow_pickle=True)
         self.transform = transform
 
     def __len__(self):
@@ -40,6 +40,9 @@ class Normalize(object):
 
     def __call__(self, image):
         image = (image - np.min(image))/(np.max(image)-np.min(image))
+        # image = (image[:,:,:,0] - np.min(image[:,:,:,0]))/(np.max(image[:,:,:,0])-np.min(image[:,:,:,0]))
+        # print(image)
+        # image = (image[:,:,:,1] - np.min(image[:,:,:,1]))/(np.max(image[:,:,:,1])-np.min(image[:,:,:,1]))
         return image
     
     def __repr__(self):
